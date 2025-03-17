@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import jax
 import torch
 from botorch.acquisition import UpperConfidenceBound
 from botorch.fit import fit_gpytorch_mll
@@ -9,18 +8,21 @@ from botorch.optim import optimize_acqf
 from botorch.utils import draw_sobol_samples
 from gpytorch import ExactMarginalLogLikelihood
 
-from AD_Hill_System_HMC_Py import observe_blackbox_simulation
+from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
 from true_func_plot import plot_stretch_data_3d
 
 torch.manual_seed(420)
 
 
 def blackbox_model(x):
+    model = HillTypeModelWrapper()
     x = x.numpy().squeeze()
-    data = observe_blackbox_simulation(x)
-    data = jax.device_get(data)
-    print(data)
-    return torch.tensor([[(data[2]-data[3])]]).to(torch.double)
+    muscle_length_one = x[0]
+    muscle_length_two = x[1]
+    range_of_motion = model.simulate_forward_step(muscle_length_one,
+                                                  muscle_length_two)
+    range_of_motion = torch.tensor([[range_of_motion]]).to(torch.double)
+    return range_of_motion
 
 
 bounds = torch.tensor([[12., 13.], [17., 18.]])
