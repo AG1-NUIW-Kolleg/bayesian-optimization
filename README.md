@@ -30,7 +30,7 @@ pip install virtualenv
 
 First, clone the repository by running:
 ```cmd
-git clone https://github.com/veit1337/bayesian-optimization.git
+git clone https://github.com/AG1-NUIW-Kolleg/bayesian-optimization.git
 ```
 
 If there are submodules present, initialize them with:
