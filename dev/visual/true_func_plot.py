@@ -43,14 +43,13 @@ def plot_stretch_data_3d(data):
     ax = fig.add_subplot(111, projection='3d')
 
     sc = ax.scatter(x, y, z, c=z)
-    # ax.plot(x, y, z, color='red')
+    ax.plot(x, y, z, color='red')
 
     ax.set_xlabel('stretch M1 [cm]')
     ax.set_ylabel('stretch M2 [cm]')
     fig.colorbar(sc, ax=ax, label='range of motion M2 [cm]')
 
     plt.savefig('plots/true_func.png')
-    print('Saved plot.')
 
 
 plot_stretch_data_3d(data)
