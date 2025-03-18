@@ -23,4 +23,4 @@ class RangeOfMotionPlotter():
 
         fig.colorbar(sc, ax=ax, label='range of motion muscle 1 [cm]')
 
-        plt.savefig('plots/true_func.png')
+        plt.savefig('out/range_of_motion_optimized.png')
