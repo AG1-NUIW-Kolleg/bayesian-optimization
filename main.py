@@ -17,7 +17,7 @@ from dev.constants import NUM_ITERATIONS
 from dev.constants import NUM_NEW_CANDIDATES
 from dev.constants import SEED
 from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
-from dev.visual.true_func_plot import plot_stretch_data_3d
+from dev.visual.range_of_motion_plotter import RangeOfMotionPlotter
 
 torch.manual_seed(SEED)
 
@@ -57,12 +57,5 @@ for iteration in range(NUM_ITERATIONS-1):
 initial_muscle_lengths = initial_muscle_lengths.numpy()
 range_of_motions = range_of_motions.numpy()
 
-data = []
-for x, y in zip(initial_muscle_lengths, range_of_motions):
-    stretch_dict = {
-        'pre_stretches': x,
-        'stretch_score': y[0],
-    }
-    data.append(stretch_dict)
-
-plot_stretch_data_3d(data)
+plotter = RangeOfMotionPlotter(initial_muscle_lengths, range_of_motions)
+plotter.plot()
