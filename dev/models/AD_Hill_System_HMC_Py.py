@@ -1,11 +1,7 @@
 # Simulation of Mass-Spring-Damper System for a Hyperelastic-Solid with uniaxial simple tension with Heun solver
 from __future__ import annotations
 
-import argparse
-import csv
 import math
-import os
-import sys
 import timeit
 
 import jax as jx
@@ -17,8 +13,6 @@ from diffrax import ODETerm
 from diffrax import PIDController
 from diffrax import SaveAt
 from diffrax import Tsit5
-from scipy.integrate import solve_ivp
-from scipy.signal import find_peaks
 
 # Enable double precision
 jx.config.update('jax_enable_x64', True)
