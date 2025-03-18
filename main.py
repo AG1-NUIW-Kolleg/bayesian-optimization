@@ -30,22 +30,13 @@ def gp_process(x, y):
     return SingleTaskGP(x, y)
 
 
-def blackbox_model(x):
-    model = HillTypeModelWrapper()
-    x = x.numpy().squeeze()
-    muscle_length_one = x[0]
-    muscle_length_two = x[1]
-    range_of_motion = model.simulate_forward_step(muscle_length_one,
-                                                  muscle_length_two)
-    range_of_motion = torch.tensor([[range_of_motion]]).to(torch.double)
-    return range_of_motion
-
+model = HillTypeModelWrapper()
 
 bounds = torch.tensor([[MIN_LENGTH_MUSCLE_ONE, MIN_LENGTH_MUSCLE_TWO],
                        [MAX_LENGTH_MUSCLE_ONE, MAX_LENGTH_MUSCLE_TWO]])
 train_x = draw_sobol_samples(
     bounds=bounds, n=1, q=NUM_INITIAL_POINTS).squeeze(0).to(torch.double)
-train_y = blackbox_model(train_x)
+train_y = model.simulate_forward_for_botorch(train_x)
 
 for iteration in range(NUM_ITERATIONS-1):
     gp = gp_process(train_x, train_y)
@@ -57,7 +48,7 @@ for iteration in range(NUM_ITERATIONS-1):
         acq_function=acqf, bounds=bounds, q=NUM_NEW_CANDIDATES,
         num_restarts=50, raw_samples=200)
 
-    new_y = blackbox_model(candidate)
+    new_y = model.simulate_forward_for_botorch(candidate)
     train_x = torch.cat([train_x, candidate])
     train_y = torch.cat([train_y, new_y])
 
