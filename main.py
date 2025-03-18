@@ -34,29 +34,31 @@ model = HillTypeModelWrapper()
 
 bounds = torch.tensor([[MIN_LENGTH_MUSCLE_ONE, MIN_LENGTH_MUSCLE_TWO],
                        [MAX_LENGTH_MUSCLE_ONE, MAX_LENGTH_MUSCLE_TWO]])
-train_x = draw_sobol_samples(
+initial_muscle_lengths = draw_sobol_samples(
     bounds=bounds, n=1, q=NUM_INITIAL_POINTS).squeeze(0).to(torch.double)
-train_y = model.simulate_forward_for_botorch(train_x)
+range_of_motions = model.simulate_forward_for_botorch(initial_muscle_lengths)
 
 for iteration in range(NUM_ITERATIONS-1):
-    gp = gp_process(train_x, train_y)
+    gp = gp_process(initial_muscle_lengths, range_of_motions)
     mll = ExactMarginalLogLikelihood(gp.likelihood, gp)
     fit_gpytorch_mll(mll)
     acqf = acq_func(gp)
 
-    candidate, _ = optimize_acqf(
+    candidate_muscle_length, _ = optimize_acqf(
         acq_function=acqf, bounds=bounds, q=NUM_NEW_CANDIDATES,
         num_restarts=50, raw_samples=200)
 
-    new_y = model.simulate_forward_for_botorch(candidate)
-    train_x = torch.cat([train_x, candidate])
-    train_y = torch.cat([train_y, new_y])
+    new_range_of_motion = model.simulate_forward_for_botorch(
+        candidate_muscle_length)
+    initial_muscle_lengths = torch.cat([initial_muscle_lengths,
+                                        candidate_muscle_length])
+    range_of_motions = torch.cat([range_of_motions, new_range_of_motion])
 
-train_x = train_x.numpy()
-train_y = train_y.numpy()
+initial_muscle_lengths = initial_muscle_lengths.numpy()
+range_of_motions = range_of_motions.numpy()
 
 data = []
-for x, y in zip(train_x, train_y):
+for x, y in zip(initial_muscle_lengths, range_of_motions):
     stretch_dict = {
         'pre_stretches': x,
         'stretch_score': y[0],
