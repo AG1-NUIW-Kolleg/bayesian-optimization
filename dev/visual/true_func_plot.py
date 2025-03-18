@@ -3,7 +3,7 @@ from __future__ import annotations
 import matplotlib.pyplot as plt
 import numpy as np
 
-from AD_Hill_System_HMC_Py import observe_blackbox_simulation
+from dev.models.AD_Hill_System_HMC_Py import observe_blackbox_simulation
 
 min_stretch_m1 = 12
 max_stretch_m1 = 17
