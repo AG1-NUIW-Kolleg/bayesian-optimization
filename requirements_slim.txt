@@ -1,8 +1,0 @@
-botorch==0.13.0
-diffrax==0.7.0
-gpytorch==1.14
-jax==0.5.2
-matplotlib==3.10.1
-numpy==2.2.4
-scipy==1.15.2
-torch==2.6.0
