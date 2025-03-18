@@ -8,10 +8,11 @@ from botorch.optim import optimize_acqf
 from botorch.utils import draw_sobol_samples
 from gpytorch import ExactMarginalLogLikelihood
 
+from dev.constants import SEED
 from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
-from true_func_plot import plot_stretch_data_3d
+from dev.visual.true_func_plot import plot_stretch_data_3d
 
-torch.manual_seed(420)
+torch.manual_seed(SEED)
 
 
 def blackbox_model(x):
