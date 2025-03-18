@@ -8,6 +8,10 @@ from botorch.optim import optimize_acqf
 from botorch.utils import draw_sobol_samples
 from gpytorch import ExactMarginalLogLikelihood
 
+from dev.constants import MAX_LENGTH_MUSCLE_ONE
+from dev.constants import MAX_LENGTH_MUSCLE_TWO
+from dev.constants import MIN_LENGTH_MUSCLE_ONE
+from dev.constants import MIN_LENGTH_MUSCLE_TWO
 from dev.constants import SEED
 from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
 from dev.visual.true_func_plot import plot_stretch_data_3d
@@ -26,7 +30,8 @@ def blackbox_model(x):
     return range_of_motion
 
 
-bounds = torch.tensor([[12., 13.], [17., 18.]])
+bounds = torch.tensor([[MIN_LENGTH_MUSCLE_ONE, MIN_LENGTH_MUSCLE_TWO],
+                       [MAX_LENGTH_MUSCLE_ONE, MAX_LENGTH_MUSCLE_TWO]])
 
 num_iterations = 10
 initial_points = 1
