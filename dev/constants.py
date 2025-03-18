@@ -7,5 +7,8 @@ MAX_LENGTH_MUSCLE_TWO = 18.0  # in cm
 
 # Bayesian Optimization
 SEED = 37
+
 NUM_INITIAL_POINTS = 1
 NUM_ITERATIONS = 10
+
+NUM_NEW_CANDIDATES = 1
