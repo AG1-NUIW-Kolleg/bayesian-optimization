@@ -407,6 +407,10 @@ def observe_blackbox_simulation(sample_input, params=None):
     if (params != None):
         default_params.update(params)
 
+    # test if input is in the range of the model
+    assert default_params['Length_Slack_M1'] < extmaxobs_muscle_1 and default_params['Length_Slack_M1'] > extminobs_muscle_1, "Length_Slack_M1 is out of bounds" 
+    assert default_params['Length_Slack_M2'] < extmaxobs_muscle_2 and default_params['Length_Slack_M2'] > extminobs_muscle_2, "Length_Slack_M2 is out of bounds"
+
     calculated_data_m1_raw, calculated_data_m2_raw = black_box_simulation(
         sample_input, default_params)
 
