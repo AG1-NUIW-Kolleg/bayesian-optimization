@@ -30,7 +30,11 @@ def gp_process(x, y):
     return SingleTaskGP(x, y)
 
 
-model = HillTypeModelWrapper()
+params = {
+    'Length_Slack_M1': 22,
+    'Length_Slack_M2': 22,
+}
+model = HillTypeModelWrapper(params)
 
 bounds = torch.tensor([
     [MIN_STRETCHED_MUSCLE_LENGTH_ONE, MIN_STRETCHED_MUSCLE_LENGTH_TWO],
@@ -38,6 +42,7 @@ bounds = torch.tensor([
 initial_muscle_lengths = draw_sobol_samples(
     bounds=bounds, n=1, q=NUM_INITIAL_POINTS).squeeze(0).to(torch.double)
 range_of_motions = model.simulate_forward_for_botorch(initial_muscle_lengths)
+
 
 for iteration in range(NUM_ITERATIONS-1):
     gp = gp_process(initial_muscle_lengths, range_of_motions)
