@@ -9,7 +9,7 @@ from dev.models.muscle_tendon_muscle_model_interface import \
 
 
 class HillTypeModelWrapper(MuscleTendonMuscleModelInterface):
-    def __init__(self, params):
+    def __init__(self, params=None):
         self._params = params
 
     def simulate_forward_step(self, stretched_muscle_length_one: float,
