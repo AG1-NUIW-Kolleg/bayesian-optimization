@@ -9,9 +9,10 @@ from dev.models.muscle_tendon_muscle_model_interface import \
 
 
 class HillTypeModelWrapper(MuscleTendonMuscleModelInterface):
-    def simulate_forward_step(self, muscle_length_one: float,
-                              muscle_length_two: float) -> float:
-        simulation_input = np.array([muscle_length_one, muscle_length_two])
+    def simulate_forward_step(self, stretched_muscle_length_one: float,
+                              stretched_muscle_length_two: float) -> float:
+        simulation_input = np.array(
+            [stretched_muscle_length_one, stretched_muscle_length_two])
 
         data = observe_blackbox_simulation(simulation_input)
         data = jax.device_get(data)

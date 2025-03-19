@@ -8,10 +8,10 @@ from botorch.optim import optimize_acqf
 from botorch.utils import draw_sobol_samples
 from gpytorch import ExactMarginalLogLikelihood
 
-from dev.constants import MAX_LENGTH_MUSCLE_ONE
-from dev.constants import MAX_LENGTH_MUSCLE_TWO
-from dev.constants import MIN_LENGTH_MUSCLE_ONE
-from dev.constants import MIN_LENGTH_MUSCLE_TWO
+from dev.constants import MAX_STRETCHED_MUSCLE_LENGTH_ONE
+from dev.constants import MAX_STRETCHED_MUSCLE_LENGTH_TWO
+from dev.constants import MIN_STRETCHED_MUSCLE_LENGTH_ONE
+from dev.constants import MIN_STRETCHED_MUSCLE_LENGTH_TWO
 from dev.constants import NUM_INITIAL_POINTS
 from dev.constants import NUM_ITERATIONS
 from dev.constants import NUM_NEW_CANDIDATES
@@ -32,8 +32,9 @@ def gp_process(x, y):
 
 model = HillTypeModelWrapper()
 
-bounds = torch.tensor([[MIN_LENGTH_MUSCLE_ONE, MIN_LENGTH_MUSCLE_TWO],
-                       [MAX_LENGTH_MUSCLE_ONE, MAX_LENGTH_MUSCLE_TWO]])
+bounds = torch.tensor([
+    [MIN_STRETCHED_MUSCLE_LENGTH_ONE, MIN_STRETCHED_MUSCLE_LENGTH_TWO],
+    [MAX_STRETCHED_MUSCLE_LENGTH_ONE, MAX_STRETCHED_MUSCLE_LENGTH_TWO]])
 initial_muscle_lengths = draw_sobol_samples(
     bounds=bounds, n=1, q=NUM_INITIAL_POINTS).squeeze(0).to(torch.double)
 range_of_motions = model.simulate_forward_for_botorch(initial_muscle_lengths)
