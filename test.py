@@ -8,5 +8,5 @@ params = {
 }
 model = HillTypeModelWrapper(params)
 
-range_of_motion = model.simulate_forward_step(3.0, 3.0) # prestrech muscle length
+range_of_motion = model.simulate_forward_step(16.0, 16.0)
 print(range_of_motion)
