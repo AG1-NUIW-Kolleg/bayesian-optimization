@@ -1,9 +1,9 @@
 from __future__ import annotations
-# muscles
-MIN_STRETCHED_MUSCLE_LENGTH_ONE = 22.0  # in cm
-MAX_STRETCHED_MUSCLE_LENGTH_ONE = 30.0  # in cm
-MIN_STRETCHED_MUSCLE_LENGTH_TWO = 22.0  # in cm
-MAX_STRETCHED_MUSCLE_LENGTH_TWO = 30.0  # in cm
+# boundaries for bayes optimization
+MIN_STRETCHED_MUSCLE_LENGTH_ONE = 9.0  # in cm
+MAX_STRETCHED_MUSCLE_LENGTH_ONE = 18.0  # in cm
+MIN_STRETCHED_MUSCLE_LENGTH_TWO = 12.0  # in cm
+MAX_STRETCHED_MUSCLE_LENGTH_TWO = 21.0  # in cm
 
 # Bayesian Optimization
 SEED = 37

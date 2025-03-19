@@ -31,8 +31,8 @@ def gp_process(x, y):
 
 
 params = {
-    'Length_Slack_M1': 22,
-    'Length_Slack_M2': 22,
+    'Length_Slack_M1': 9,
+    'Length_Slack_M2': 12,
 }
 model = HillTypeModelWrapper(params)
 
