@@ -64,4 +64,5 @@ initial_muscle_lengths = initial_muscle_lengths.numpy()
 range_of_motions = range_of_motions.numpy()
 
 plotter = RangeOfMotionPlotter(initial_muscle_lengths, range_of_motions)
+plotter.save_as_csv()
 plotter.plot()
