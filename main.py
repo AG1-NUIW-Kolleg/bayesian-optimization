@@ -8,14 +8,16 @@ from botorch.optim import optimize_acqf
 from botorch.utils import draw_sobol_samples
 from gpytorch import ExactMarginalLogLikelihood
 
-from dev.constants import MAX_STRETCHED_MUSCLE_LENGTH_ONE
-from dev.constants import MAX_STRETCHED_MUSCLE_LENGTH_TWO
-from dev.constants import MIN_STRETCHED_MUSCLE_LENGTH_ONE
-from dev.constants import MIN_STRETCHED_MUSCLE_LENGTH_TWO
-from dev.constants import NUM_INITIAL_POINTS
-from dev.constants import NUM_ITERATIONS
-from dev.constants import NUM_NEW_CANDIDATES
-from dev.constants import SEED
+from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_ONE
+from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_TWO
+from dev.constants.bayes import MIN_STRETCHED_MUSCLE_LENGTH_ONE
+from dev.constants.bayes import MIN_STRETCHED_MUSCLE_LENGTH_TWO
+from dev.constants.bayes import NUM_INITIAL_POINTS
+from dev.constants.bayes import NUM_ITERATIONS
+from dev.constants.bayes import NUM_NEW_CANDIDATES
+from dev.constants.bayes import SEED
+from dev.constants.physical import RELAXED_MUSCLE_LENGTH_ONE
+from dev.constants.physical import RELAXED_MUSCLE_LENGTH_TWO
 from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
 from dev.visual.range_of_motion_plotter import RangeOfMotionPlotter
 
@@ -31,8 +33,8 @@ def gp_process(x, y):
 
 
 params = {
-    'Length_Slack_M1': 9,
-    'Length_Slack_M2': 12,
+    'Length_Slack_M1': RELAXED_MUSCLE_LENGTH_ONE,
+    'Length_Slack_M2': RELAXED_MUSCLE_LENGTH_TWO,
 }
 model = HillTypeModelWrapper(params)
 
