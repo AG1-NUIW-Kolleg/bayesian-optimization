@@ -1,12 +1,24 @@
 from __future__ import annotations
 
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 class RangeOfMotionPlotter():
     def __init__(self, initial_muscle_lengths, range_of_motions):
         self._muscle_lengths = initial_muscle_lengths
         self._range_of_motions = range_of_motions
+
+    def save_as_csv(self):
+        range_of_motions = self._range_of_motions.flatten()
+        stretched_muscle_length_one = self._muscle_lengths[:, 0]
+        stretched_muscle_length_two = self._muscle_lengths[:, 1]
+        df = pd.DataFrame(
+            {'range_of_motion': range_of_motions,
+             'stretched_muscle_length_one': stretched_muscle_length_one,
+             'stretched_muscle_length_two': stretched_muscle_length_two}
+        )
+        df.to_csv('out/data.csv')
 
     def plot(self):
         fig = plt.figure()
