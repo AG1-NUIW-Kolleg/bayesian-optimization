@@ -32,9 +32,6 @@ extminobs_muscle_1 = 8.7  # Minimal extension of muscle 1
 extmaxobs_muscle_2 = 21.00  # Maximal extension of muscle 2
 extminobs_muscle_2 = 11.5  # Minimal extension of muscle 2
 
-observed_data = [extmaxobs_muscle_1, extminobs_muscle_1,
-                 extmaxobs_muscle_2, extminobs_muscle_2]
-
 # Parameters
 
 ode_solver = 1  # 1 = Thelen, 2 = Van Soest, 3 = Silva, 4 = Hyperelastic
@@ -406,10 +403,16 @@ def black_box_simulation(input_value, params):
 
 # Compute forward simulation output from input values
 def observe_blackbox_simulation(sample_input, params=None):
-    if params is None:
-        params = model_parameters
+    default_params = model_parameters
+    if (params != None):
+        default_params.update(params)
+
+    # test if input is in the range of the model
+    assert default_params['Length_Slack_M1'] < extmaxobs_muscle_1 and default_params['Length_Slack_M1'] > extminobs_muscle_1, f"Length_Slack_M1 is out of bounds. Must be inside [{extminobs_muscle_1}, {extmaxobs_muscle_1}]" 
+    assert default_params['Length_Slack_M2'] < extmaxobs_muscle_2 and default_params['Length_Slack_M2'] > extminobs_muscle_2, f"Length_Slack_M2 is out of bounds. Must be inside [{extminobs_muscle_2}, {extmaxobs_muscle_2}]"
+
     calculated_data_m1_raw, calculated_data_m2_raw = black_box_simulation(
-        sample_input, params)
+        sample_input, default_params)
 
     value_maximal_length_m1 = jnp.amax(calculated_data_m1_raw)
     value_minimal_length_m1 = jnp.amin(calculated_data_m1_raw)
