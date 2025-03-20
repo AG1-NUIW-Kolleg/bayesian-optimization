@@ -1,0 +1,3 @@
+[submodule "extDev/opendihu"]
+	path = extDev/opendihu
+	url = git@github.com:opendihu/opendihu.git
