@@ -31,7 +31,7 @@ class RangeOfMotionPlotter():
         )
         df.to_csv('out/data.csv')
 
-    def plot(self):
+    def plot(self, title):
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
 
@@ -46,4 +46,4 @@ class RangeOfMotionPlotter():
 
         fig.colorbar(sc, ax=ax, label='range of motion muscle 1 [cm]')
 
-        plt.savefig('out/range_of_motion_optimized.png')
+        plt.savefig(f'out/{title}.png')
