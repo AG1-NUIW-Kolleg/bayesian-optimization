@@ -1,6 +1,8 @@
 from __future__ import annotations
 import itertools
 import random
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning) # FIXME: does not work
 
 import numpy as np
 import torch
@@ -10,7 +12,6 @@ from botorch.models import SingleTaskGP
 from botorch.optim import optimize_acqf
 from botorch.utils import draw_sobol_samples
 from gpytorch import ExactMarginalLogLikelihood
-import warnings
 
 from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_ONE
 from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_TWO
@@ -50,15 +51,7 @@ values = list(params.values())
 # Generate all combinations and ensure values are Python floats
 meshgrid_dicts = [dict(zip(keys, map(float, combination))) for combination in itertools.product(*values)]
 
-# Print results
-# for d in meshgrid_dicts:
-#     print(d)
-j = 1
 for param in np.random.choice(meshgrid_dicts, size=min(10, len(meshgrid_dicts)), replace=False):
-    #params_to_try = params.copy()
-    #params_to_try.update(param)
-    print('PARAM',j,param)
-    j += 1
     model = HillTypeModelWrapper(param)
 
 
@@ -74,9 +67,6 @@ for param in np.random.choice(meshgrid_dicts, size=min(10, len(meshgrid_dicts)),
         # min-max scaling
         initial_muscle_lengths = (initial_muscle_lengths - bounds[0][0]) / (bounds[1][0] - bounds[0][0])
         range_of_motions = (range_of_motions - bounds[0][1]) / (bounds[1][1] - bounds[0][1])
-
-        # print('initial_muscle_lengths',initial_muscle_lengths)
-        # print('range_of_motions',range_of_motions)
 
         gp = gp_process(initial_muscle_lengths, range_of_motions)
         mll = ExactMarginalLogLikelihood(gp.likelihood, gp)
