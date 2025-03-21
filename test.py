@@ -49,10 +49,11 @@ keys = list(params.keys())
 values = list(params.values())
 
 # Generate all combinations and ensure values are Python floats
-meshgrid_dicts = [dict(zip(keys, map(float, combination))) for combination in itertools.product(*values)]
+meshgrid_dicts = [dict(zip(keys, combination)) for combination in itertools.product(*values)]
 j = 0
 for param in np.random.choice(meshgrid_dicts, size=min(10, len(meshgrid_dicts)), replace=False):
     print(f"Running iteration {j+1} of {min(10, len(meshgrid_dicts))}")
+    print(param)
     j += 1
     model = HillTypeModelWrapper(param)
 
