@@ -16,7 +16,7 @@ from dev.constants import NUM_INITIAL_POINTS
 # define variables
 # fixed variables: 
 #   slack length of muscle one and two
-#   maximum/ minimum extension of muscle one and two
+#   maximum/ minimum extension of muscle one and two (for all ppl, don't change)
 #   mass 
 # random variables:
 # TODO: define the random variables
