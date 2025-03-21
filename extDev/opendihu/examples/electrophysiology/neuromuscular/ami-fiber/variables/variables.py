@@ -83,9 +83,9 @@ input_directory = os.path.join(os.environ.get('OPENDIHU_HOME', '../../../../../'
 
 cellml_file = input_directory+"/hodgkin_huxley-razumova.cellml" #TODO
 #fiber_distribution_file = input_directory+"/MU_fibre_distribution_multidomain_67x67_100.txt"
-fiber_distribution_file = input_directory + "MU_fibre_distribution_10MUs.txt" # so in cuboid definiert
+fiber_distribution_file = input_directory + "/MU_fibre_distribution_10MUs.txt" # so in cuboid definiert
 #firing_times_file = input_directory + "/MU_firing_times_real.txt"
-firing_times_file = input_directory + "MU_firing_times_always.txt" # so in cuboid definiert
+firing_times_file = input_directory + "/MU_firing_times_always.txt" # so in cuboid definiert
 no_firing_times_file = input_directory + "/MU_firing_times_never.txt" # no firing
 
 #maximum_number_of_threads = 1 
