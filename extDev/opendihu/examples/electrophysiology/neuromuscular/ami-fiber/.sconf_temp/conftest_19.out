@@ -1,0 +1,6 @@
+(0) 10:42:39 [impl::SolverInterfaceImpl]:184 in configure: [0mThis is preCICE version 2.5.0
+(0) 10:42:39 [impl::SolverInterfaceImpl]:185 in configure: [0mRevision info: no-info [not a repository]
+(0) 10:42:39 [impl::SolverInterfaceImpl]:186 in configure: [0mBuild type: Release (without debug log)
+(0) 10:42:39 [impl::SolverInterfaceImpl]:204 in configure: [0mConfiguring preCICE with configuration "install_precice-config.xml"
+(0) 10:42:39 [impl::SolverInterfaceImpl]:205 in configure: [0mI am participant "Participant1"
+(0) 10:42:39 [impl::SolverInterfaceImpl]:167 in ~SolverInterfaceImpl: [0mImplicitly finalizing in destructor
