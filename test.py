@@ -50,10 +50,11 @@ values = list(params.values())
 
 # Generate all combinations and ensure values are Python floats
 meshgrid_dicts = [dict(zip(keys, map(float, combination))) for combination in itertools.product(*values)]
-
+j = 0
 for param in np.random.choice(meshgrid_dicts, size=min(10, len(meshgrid_dicts)), replace=False):
+    print(f"Running iteration {j+1} of {min(10, len(meshgrid_dicts))}")
+    j += 1
     model = HillTypeModelWrapper(param)
-
 
     bounds = torch.tensor([
         [MIN_STRETCHED_MUSCLE_LENGTH_ONE, MIN_STRETCHED_MUSCLE_LENGTH_TWO],
@@ -64,10 +65,7 @@ for param in np.random.choice(meshgrid_dicts, size=min(10, len(meshgrid_dicts)),
 
 
     for iteration in range(NUM_ITERATIONS-1):
-        # min-max scaling
-        initial_muscle_lengths = (initial_muscle_lengths - bounds[0][0]) / (bounds[1][0] - bounds[0][0])
-        range_of_motions = (range_of_motions - bounds[0][1]) / (bounds[1][1] - bounds[0][1])
-
+       
         gp = gp_process(initial_muscle_lengths, range_of_motions)
         mll = ExactMarginalLogLikelihood(gp.likelihood, gp)
         fit_gpytorch_mll(mll)
@@ -77,15 +75,16 @@ for param in np.random.choice(meshgrid_dicts, size=min(10, len(meshgrid_dicts)),
             acq_function=acqf, bounds=bounds, q=NUM_NEW_CANDIDATES,
             num_restarts=50, raw_samples=200)
 
+        # FIXME: 
         new_range_of_motion = model.simulate_forward_for_botorch(
             candidate_muscle_length)
         
         # Problem: new_range_of_motion contains infinity
         # Solution: set infinity to 0
         if torch.isinf(new_range_of_motion).sum() > 0:
-            warnings.warn("Range of motion contains infinity: {}".format(new_range_of_motion))
+           warnings.warn("Range of motion contains infinity: {}".format(new_range_of_motion))
 
-        new_range_of_motion[torch.isinf(new_range_of_motion)] = 0
+        # new_range_of_motion[torch.isinf(new_range_of_motion)] = 0
        
         initial_muscle_lengths = torch.cat([initial_muscle_lengths,
                                             candidate_muscle_length])
