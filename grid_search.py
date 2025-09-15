@@ -3,17 +3,10 @@ import pandas as pd
 from tqdm import tqdm
 
 from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
-from dev.visual.range_of_motion_plotter import RangeOfMotionPlotter
-
-from dev.models.AD_Hill_System_HMC_Py import extminobs_muscle_1
-from dev.models.AD_Hill_System_HMC_Py import extmaxobs_muscle_1
-from dev.models.AD_Hill_System_HMC_Py import extminobs_muscle_2
-from dev.models.AD_Hill_System_HMC_Py import extmaxobs_muscle_2
 
 from dev.constants import ADDITIONAL_STRETCH_LENGTH
 
 n = 13
-
 
 relaxed_muscle_lengths = [
     (9.0,12.0),
