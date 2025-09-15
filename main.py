@@ -6,6 +6,7 @@ from botorch.fit import fit_gpytorch_mll
 from botorch.models import SingleTaskGP
 from botorch.optim import optimize_acqf
 from botorch.utils import draw_sobol_samples
+from botorch.optim.stopping import ExpMAStoppingCriterion
 from gpytorch import ExactMarginalLogLikelihood
 
 from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_ONE
@@ -13,15 +14,12 @@ from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_TWO
 from dev.constants.bayes import MIN_STRETCHED_MUSCLE_LENGTH_ONE
 from dev.constants.bayes import MIN_STRETCHED_MUSCLE_LENGTH_TWO
 from dev.constants.bayes import NUM_INITIAL_POINTS
-from dev.constants.bayes import NUM_ITERATIONS
 from dev.constants.bayes import NUM_NEW_CANDIDATES
 from dev.constants.bayes import SEED
 from dev.constants.physical import RELAXED_MUSCLE_LENGTH_ONE
 from dev.constants.physical import RELAXED_MUSCLE_LENGTH_TWO
 from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
 from dev.visual.range_of_motion_plotter import RangeOfMotionPlotter
-
-torch.manual_seed(SEED)
 
 
 def acq_func(gaussian_process):
@@ -31,6 +29,7 @@ def acq_func(gaussian_process):
 def gp_process(x, y):
     return SingleTaskGP(x, y)
 
+torch.manual_seed(SEED)
 
 params = {
     'Length_Slack_M1': RELAXED_MUSCLE_LENGTH_ONE,
@@ -41,12 +40,15 @@ model = HillTypeModelWrapper(params)
 bounds = torch.tensor([
     [MIN_STRETCHED_MUSCLE_LENGTH_ONE, MIN_STRETCHED_MUSCLE_LENGTH_TWO],
     [MAX_STRETCHED_MUSCLE_LENGTH_ONE, MAX_STRETCHED_MUSCLE_LENGTH_TWO]])
+
 initial_muscle_lengths = draw_sobol_samples(
     bounds=bounds, n=1, q=NUM_INITIAL_POINTS).squeeze(0).to(torch.double)
 range_of_motions = model.simulate_forward_for_botorch(initial_muscle_lengths)
 
+stopper = ExpMAStoppingCriterion(n_window=2, minimize=False)
+is_optimization_converged = False
 
-for iteration in range(NUM_ITERATIONS-1):
+while (is_optimization_converged is False):
     gp = gp_process(initial_muscle_lengths, range_of_motions)
     mll = ExactMarginalLogLikelihood(gp.likelihood, gp)
     fit_gpytorch_mll(mll)
@@ -61,6 +63,8 @@ for iteration in range(NUM_ITERATIONS-1):
     initial_muscle_lengths = torch.cat([initial_muscle_lengths,
                                         candidate_muscle_length])
     range_of_motions = torch.cat([range_of_motions, new_range_of_motion])
+
+    is_optimization_converged = stopper.evaluate(new_range_of_motion)
 
 initial_muscle_lengths = initial_muscle_lengths.numpy()
 range_of_motions = range_of_motions.numpy()
