@@ -11,8 +11,6 @@ from gpytorch import ExactMarginalLogLikelihood
 
 from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_ONE
 from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_TWO
-from dev.constants.bayes import MIN_STRETCHED_MUSCLE_LENGTH_ONE
-from dev.constants.bayes import MIN_STRETCHED_MUSCLE_LENGTH_TWO
 from dev.constants.bayes import NUM_INITIAL_POINTS
 from dev.constants.bayes import NUM_NEW_CANDIDATES
 from dev.constants.bayes import SEED
@@ -35,10 +33,11 @@ params = {
     'Length_Slack_M1': RELAXED_MUSCLE_LENGTH_ONE,
     'Length_Slack_M2': RELAXED_MUSCLE_LENGTH_TWO,
 }
+
 model = HillTypeModelWrapper(params)
 
 bounds = torch.tensor([
-    [MIN_STRETCHED_MUSCLE_LENGTH_ONE, MIN_STRETCHED_MUSCLE_LENGTH_TWO],
+    [RELAXED_MUSCLE_LENGTH_ONE, RELAXED_MUSCLE_LENGTH_TWO],
     [MAX_STRETCHED_MUSCLE_LENGTH_ONE, MAX_STRETCHED_MUSCLE_LENGTH_TWO]])
 
 initial_muscle_lengths = draw_sobol_samples(
