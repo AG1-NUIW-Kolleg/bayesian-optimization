@@ -3,14 +3,14 @@ from __future__ import annotations
 import jax
 import numpy as np
 
+from dev.models.AD_Hill_System_HMC_Py import extmaxobs_muscle_1
+from dev.models.AD_Hill_System_HMC_Py import extmaxobs_muscle_2
+from dev.models.AD_Hill_System_HMC_Py import extminobs_muscle_1
+from dev.models.AD_Hill_System_HMC_Py import extminobs_muscle_2
 from dev.models.AD_Hill_System_HMC_Py import observe_blackbox_simulation
 from dev.models.muscle_tendon_muscle_model_interface import \
     MuscleTendonMuscleModelInterface
 
-from dev.models.AD_Hill_System_HMC_Py import extminobs_muscle_1
-from dev.models.AD_Hill_System_HMC_Py import extmaxobs_muscle_1
-from dev.models.AD_Hill_System_HMC_Py import extminobs_muscle_2
-from dev.models.AD_Hill_System_HMC_Py import extmaxobs_muscle_2
 
 class HillTypeModelWrapper(MuscleTendonMuscleModelInterface):
     def __init__(self, params=None):
@@ -30,13 +30,13 @@ class HillTypeModelWrapper(MuscleTendonMuscleModelInterface):
         return range_of_motion
 
     def is_input_in_bounds(self, stretched_muscle_length_one: float,
-                              stretched_muscle_length_two: float) -> bool:
+                           stretched_muscle_length_two: float) -> bool:
         is_in_bounds = False
 
         if (stretched_muscle_length_one >= extminobs_muscle_1 and
             stretched_muscle_length_one <= extmaxobs_muscle_1 and
             stretched_muscle_length_two >= extminobs_muscle_2 and
-            stretched_muscle_length_two <= extmaxobs_muscle_2):
+                stretched_muscle_length_two <= extmaxobs_muscle_2):
             is_in_bounds = True
 
         return is_in_bounds

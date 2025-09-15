@@ -5,8 +5,8 @@ from botorch.acquisition import UpperConfidenceBound
 from botorch.fit import fit_gpytorch_mll
 from botorch.models import SingleTaskGP
 from botorch.optim import optimize_acqf
-from botorch.utils import draw_sobol_samples
 from botorch.optim.stopping import ExpMAStoppingCriterion
+from botorch.utils import draw_sobol_samples
 from gpytorch import ExactMarginalLogLikelihood
 
 from dev.constants import ADDITIONAL_STRETCH_LENGTH
@@ -24,12 +24,13 @@ def acq_func(gaussian_process):
 def gp_process(x, y):
     return SingleTaskGP(x, y)
 
+
 relaxed_muscle_lengths = [
-    (9.0,12.0),
-    (11.0,12.0),
-    (11.0,15.0),
-    (12.0,13.0),
-    (14.0,15.0)
+    (9.0, 12.0),
+    (11.0, 12.0),
+    (11.0, 15.0),
+    (12.0, 13.0),
+    (14.0, 15.0)
 ]
 
 torch.manual_seed(SEED)
@@ -54,7 +55,8 @@ for length_pair in relaxed_muscle_lengths:
 
     initial_muscle_lengths = draw_sobol_samples(
         bounds=bounds, n=1, q=NUM_INITIAL_POINTS).squeeze(0).to(torch.double)
-    range_of_motions = model.simulate_forward_for_botorch(initial_muscle_lengths)
+    range_of_motions = model.simulate_forward_for_botorch(
+        initial_muscle_lengths)
 
     stopper = ExpMAStoppingCriterion(n_window=2, minimize=False)
     is_optimization_converged = False
@@ -80,6 +82,7 @@ for length_pair in relaxed_muscle_lengths:
     initial_muscle_lengths = initial_muscle_lengths.numpy()
     range_of_motions = range_of_motions.numpy()
 
-    plotter = RangeOfMotionPlotter(initial_muscle_lengths, range_of_motions, params)
+    plotter = RangeOfMotionPlotter(
+        initial_muscle_lengths, range_of_motions, params)
     plotter.save_as_csv(f'm1_{length_pair[0]}_m2_{length_pair[1]}')
     plotter.plot()

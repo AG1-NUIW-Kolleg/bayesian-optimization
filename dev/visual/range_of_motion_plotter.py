@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+
 class RangeOfMotionPlotter():
     def __init__(self, initial_muscle_lengths, range_of_motions, params):
         self._muscle_lengths = initial_muscle_lengths

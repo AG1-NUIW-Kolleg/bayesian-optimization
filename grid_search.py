@@ -1,19 +1,20 @@
+from __future__ import annotations
+
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
-
 from dev.constants import ADDITIONAL_STRETCH_LENGTH
+from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
 
 n = 13
 
 relaxed_muscle_lengths = [
-    (9.0,12.0),
-    (11.0,12.0),
-    (11.0,15.0),
-    (12.0,13.0),
-    (14.0,15.0)
+    (9.0, 12.0),
+    (11.0, 12.0),
+    (11.0, 15.0),
+    (12.0, 13.0),
+    (14.0, 15.0)
 ]
 
 for length_pair in relaxed_muscle_lengths:
@@ -27,20 +28,21 @@ for length_pair in relaxed_muscle_lengths:
     }
 
     stretched_muscle_lengths_1 = np.linspace(
-         length_pair[0], length_pair[0]+ADDITIONAL_STRETCH_LENGTH, n)
+        length_pair[0], length_pair[0]+ADDITIONAL_STRETCH_LENGTH, n)
     stretched_muscle_lengths_2 = np.linspace(
-         length_pair[1], length_pair[1]+ADDITIONAL_STRETCH_LENGTH, n)
+        length_pair[1], length_pair[1]+ADDITIONAL_STRETCH_LENGTH, n)
 
     model = HillTypeModelWrapper(params)
 
-    for muscle_length_1 in tqdm(stretched_muscle_lengths_1, 
-        desc = f'm1 = {length_pair[0]}cm | m2 = {length_pair[1]}cm'):
+    for muscle_length_1 in tqdm(
+            stretched_muscle_lengths_1,
+            desc=f'm1 = {length_pair[0]}cm | m2 = {length_pair[1]}cm'):
         for muscle_length_2 in stretched_muscle_lengths_2:
-                range_of_motion = model.simulate_forward_step(
-                    muscle_length_1, muscle_length_2)
-                range_of_motions.append(range_of_motion)
-                used_stretched_muscle_lengths_1.append(muscle_length_1)
-                used_stretched_muscle_lengths_2.append(muscle_length_2)
+            range_of_motion = model.simulate_forward_step(
+                muscle_length_1, muscle_length_2)
+            range_of_motions.append(range_of_motion)
+            used_stretched_muscle_lengths_1.append(muscle_length_1)
+            used_stretched_muscle_lengths_2.append(muscle_length_2)
 
     k = len(range_of_motions)
     relaxed_muscle_lengths_1 = np.full(k, length_pair[0])
