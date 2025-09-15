@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from dev.constants.physical import RELAXED_MUSCLE_LENGTH_ONE
-from dev.constants.physical import RELAXED_MUSCLE_LENGTH_TWO
+from dev.constants import RELAXED_MUSCLE_LENGTH_ONE
+from dev.constants import RELAXED_MUSCLE_LENGTH_TWO
 
 
 class RangeOfMotionPlotter():
