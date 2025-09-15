@@ -9,15 +9,12 @@ from botorch.utils import draw_sobol_samples
 from botorch.optim.stopping import ExpMAStoppingCriterion
 from gpytorch import ExactMarginalLogLikelihood
 
-from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_ONE
-from dev.constants.bayes import MAX_STRETCHED_MUSCLE_LENGTH_TWO
-from dev.constants.bayes import MIN_STRETCHED_MUSCLE_LENGTH_ONE
-from dev.constants.bayes import MIN_STRETCHED_MUSCLE_LENGTH_TWO
-from dev.constants.bayes import NUM_INITIAL_POINTS
-from dev.constants.bayes import NUM_NEW_CANDIDATES
-from dev.constants.bayes import SEED
-from dev.constants.physical import RELAXED_MUSCLE_LENGTH_ONE
-from dev.constants.physical import RELAXED_MUSCLE_LENGTH_TWO
+from dev.constants import ADDITIONAL_STRETCH_LENGTH
+from dev.constants import NUM_INITIAL_POINTS
+from dev.constants import NUM_NEW_CANDIDATES
+from dev.constants import SEED
+from dev.constants import RELAXED_MUSCLE_LENGTH_ONE
+from dev.constants import RELAXED_MUSCLE_LENGTH_TWO
 from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
 from dev.visual.range_of_motion_plotter import RangeOfMotionPlotter
 
@@ -35,11 +32,17 @@ params = {
     'Length_Slack_M1': RELAXED_MUSCLE_LENGTH_ONE,
     'Length_Slack_M2': RELAXED_MUSCLE_LENGTH_TWO,
 }
+
 model = HillTypeModelWrapper(params)
 
+max_stretched_muscle_length_one = \
+    RELAXED_MUSCLE_LENGTH_ONE + ADDITIONAL_STRETCH_LENGTH
+max_stretched_muscle_length_two = \
+    RELAXED_MUSCLE_LENGTH_TWO + ADDITIONAL_STRETCH_LENGTH
+
 bounds = torch.tensor([
-    [MIN_STRETCHED_MUSCLE_LENGTH_ONE, MIN_STRETCHED_MUSCLE_LENGTH_TWO],
-    [MAX_STRETCHED_MUSCLE_LENGTH_ONE, MAX_STRETCHED_MUSCLE_LENGTH_TWO]])
+    [RELAXED_MUSCLE_LENGTH_ONE, RELAXED_MUSCLE_LENGTH_TWO],
+    [max_stretched_muscle_length_one, max_stretched_muscle_length_two]])
 
 initial_muscle_lengths = draw_sobol_samples(
     bounds=bounds, n=1, q=NUM_INITIAL_POINTS).squeeze(0).to(torch.double)

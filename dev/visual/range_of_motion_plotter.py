@@ -4,32 +4,32 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from dev.constants.physical import RELAXED_MUSCLE_LENGTH_ONE
-from dev.constants.physical import RELAXED_MUSCLE_LENGTH_TWO
-
-
 class RangeOfMotionPlotter():
-    def __init__(self, initial_muscle_lengths, range_of_motions):
+    def __init__(self, initial_muscle_lengths, range_of_motions, params):
         self._muscle_lengths = initial_muscle_lengths
         self._range_of_motions = range_of_motions
+        self._params = params
 
-    def save_as_csv(self):
+    def save_as_csv(self, filename):
         range_of_motions = self._range_of_motions.flatten()
         stretched_muscle_length_one = self._muscle_lengths[:, 0]
         stretched_muscle_length_two = self._muscle_lengths[:, 1]
 
+        relaxed_muscle_length_one = self._params['Length_Slack_M1']
+        relaxed_muscle_length_two = self._params['Length_Slack_M2']
+
         df_len = len(range_of_motions)
-        relaxed_muscle_length_one = np.full(df_len, RELAXED_MUSCLE_LENGTH_ONE)
-        relaxed_muscle_length_two = np.full(df_len, RELAXED_MUSCLE_LENGTH_TWO)
+        relaxed_muscle_lengths_one = np.full(df_len, relaxed_muscle_length_one)
+        relaxed_muscle_lengths_two = np.full(df_len, relaxed_muscle_length_two)
 
         df = pd.DataFrame(
             {'range_of_motion': range_of_motions,
              'stretched_muscle_length_one': stretched_muscle_length_one,
              'stretched_muscle_length_two': stretched_muscle_length_two,
-             'relaxed_muscle_length_one': relaxed_muscle_length_one,
-             'relaxed_muscle_length_two': relaxed_muscle_length_two}
+             'relaxed_muscle_length_one': relaxed_muscle_lengths_one,
+             'relaxed_muscle_length_two': relaxed_muscle_lengths_two}
         )
-        df.to_csv('out/data.csv')
+        df.to_csv(f'out/data_{filename}.csv')
 
     def plot(self):
         fig = plt.figure()
