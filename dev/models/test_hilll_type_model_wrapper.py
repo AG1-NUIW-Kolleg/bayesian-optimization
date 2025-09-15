@@ -12,11 +12,19 @@ def test_does_forward_simulation_return_float():
 
     assert isinstance(result, float)
 
-def test_does_input_out_of_bounds_return_false():
+def test_does_too_small_input_return_false():
     model = HillTypeModelWrapper()
     too_small_length = 5.0
 
     is_in_bounds = model.is_input_in_bounds(too_small_length, too_small_length)
+
+    assert (is_in_bounds is False)
+
+def test_does_too_large_input_return_false():
+    model = HillTypeModelWrapper()
+    too_large_lenght = 23.0
+
+    is_in_bounds = model.is_input_in_bounds(too_large_lenght, too_large_lenght)
 
     assert (is_in_bounds is False)
 
