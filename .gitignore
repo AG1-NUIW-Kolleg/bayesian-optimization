@@ -1,5 +1,6 @@
 # manual entries
 *.png
+out/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
