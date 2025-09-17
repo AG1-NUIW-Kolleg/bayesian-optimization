@@ -1,12 +1,15 @@
 from __future__ import annotations
 
-from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
-# slack muscle length
-params = {
-    'Length_Slack_M1': 13,
-    'Length_Slack_M2': 13,
-}
-model = HillTypeModelWrapper(params)
+import os
 
-range_of_motion = model.simulate_forward_step(16.0, 16.0)
+from dev.constants import FILEPATH_OUTPUT
+from dev.models.dummy_cuboid_wrapper import DummyCuboidWrapper
+from dev.util.range_of_motion_parser import RangeOfMotionParser
+
+script_path = os.path.join(
+    os.path.dirname(__file__), 'dev', 'models', 'dummy_model_script.py')
+parser = RangeOfMotionParser(FILEPATH_OUTPUT)
+
+model = DummyCuboidWrapper(script_path, parser)
+range_of_motion = model.simulate_dummy_step()
 print(range_of_motion)
