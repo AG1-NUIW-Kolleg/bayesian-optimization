@@ -9,4 +9,5 @@ NUM_INITIAL_POINTS = 1
 NUM_NEW_CANDIDATES = 1
 
 # Cubiod model
-FILEPATH_OUTPUT = 'out/out.txt'
+FILEPATH_OUTPUT = \
+    '/usr/local/home/cmcs-fa01/opendihu-elise/examples/electrophysiology/neuromuscular/cuboid_muscle_with_prestretch_4x4/build_release/muscle_length_contraction.csv'
