@@ -10,5 +10,5 @@ script_path = \
 parser = RangeOfMotionParser(FILEPATH_OUTPUT)
 
 model = CuboidWrapper(script_path, parser)
-range_of_motion = model.simulate_forward_for_botorch(1.1)
+range_of_motion = model.simulate_forward_step(1.1)
 print(range_of_motion)
