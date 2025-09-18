@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import random
 
+import pandas as pd
 import torch
 from botorch.acquisition import UpperConfidenceBound
 from botorch.fit import fit_gpytorch_mll
@@ -35,11 +36,11 @@ parser = RangeOfMotionParser(FILEPATH_OUTPUT)
 
 model = CuboidWrapper(script_path, parser)
 
-bounds = torch.tensor([[0, ADDITIONAL_STRETCH_FORCE]])
+bounds = torch.tensor([[0.0], [ADDITIONAL_STRETCH_FORCE]])
 
 initial_prestretch_force = random.uniform(0, ADDITIONAL_STRETCH_FORCE)
 initial_prestretch_force = torch.tensor(
-    initial_prestretch_force, dtype=torch.double)
+    [[initial_prestretch_force],], dtype=torch.double)
 
 range_of_motions = model.simulate_forward_for_botorch(initial_prestretch_force)
 
@@ -68,9 +69,8 @@ while (is_optimization_converged is False):
 initial_prestretch_force = initial_prestretch_force.numpy()
 range_of_motions = range_of_motions.numpy()
 
-# plotter = RangeOfMotionPlotter(
-#     initial_prestretch_force, range_of_motions, params)
-# plotter.save_as_csv(f'm1_{length_pair[0]}_m2_{length_pair[1]}')
-# plotter.plot()
-print(initial_prestretch_force)
-print(range_of_motions)
+df = pd.DataFrame({
+    'prestretch_force': [tensor.item() for tensor in initial_prestretch_force],
+    'range_of_motion': [tensor.item() for tensor in range_of_motions],
+})
+df.to_csv('bo_results.csv')

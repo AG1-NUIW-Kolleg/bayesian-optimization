@@ -25,7 +25,7 @@ class CuboidWrapper(SingleMuscleInterface):
         env['PWD'] = self._simulation_script_path + '/build_release'
 
         subprocess.run(
-            f'./muscle_with_prestretch ../settings_muscle_with_prestretch.py --force {pre_stretch_force}',
+            f'./muscle_with_prestretch ../settings_muscle_with_prestretch.py --force {float(pre_stretch_force)}',
             shell=True, check=True, env=env, cwd=env['PWD'])
 
         range_of_motion = self._parser.parse_range_of_motion()
