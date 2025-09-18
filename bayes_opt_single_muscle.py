@@ -73,4 +73,4 @@ df = pd.DataFrame({
     'prestretch_force': [tensor.item() for tensor in initial_prestretch_force],
     'range_of_motion': [tensor.item() for tensor in range_of_motions],
 })
-df.to_csv('bo_results.csv')
+df.to_csv('out/bo_cuboid.csv')
