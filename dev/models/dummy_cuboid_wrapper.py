@@ -25,3 +25,7 @@ class DummyCuboidWrapper():
         subprocess.run(
             './muscle_with_prestretch ../settings_muscle_with_prestretch.py --force 1.1',
             shell=True, check=True, env=env, cwd=env['PWD'])
+
+        range_of_motion = self._parser.parse_range_of_motion()
+
+        return range_of_motion
