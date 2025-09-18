@@ -14,7 +14,7 @@ class CuboidWrapper():
             os.path.dirname(os.path.dirname(os.path.dirname(
                 simulation_script_path)))
 
-    def simulate_step(self):
+    def simulate_step(self, pre_stretch_force):
         env = os.environ.copy()
         env['PYTHONPATH'] = self._project_root
         env['PATH'] = \
@@ -23,7 +23,7 @@ class CuboidWrapper():
         env['PWD'] = self._simulation_script_path + '/build_release'
 
         subprocess.run(
-            './muscle_with_prestretch ../settings_muscle_with_prestretch.py --force 1.1',
+            f'./muscle_with_prestretch ../settings_muscle_with_prestretch.py --force {pre_stretch_force}',
             shell=True, check=True, env=env, cwd=env['PWD'])
 
         range_of_motion = self._parser.parse_range_of_motion()
