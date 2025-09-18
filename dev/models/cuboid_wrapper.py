@@ -4,7 +4,7 @@ import os
 import subprocess
 
 
-class DummyCuboidWrapper():
+class CuboidWrapper():
     def __init__(self, simulation_script_path, parser, params=None):
         self._simulation_script_path = simulation_script_path
         self._parser = parser
@@ -14,7 +14,7 @@ class DummyCuboidWrapper():
             os.path.dirname(os.path.dirname(os.path.dirname(
                 simulation_script_path)))
 
-    def simulate_dummy_step(self):
+    def simulate_step(self):
         env = os.environ.copy()
         env['PYTHONPATH'] = self._project_root
         env['PATH'] = \
