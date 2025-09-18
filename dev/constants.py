@@ -6,7 +6,7 @@ RELAXED_MUSCLE_LENGTH_TWO = 13.0  # in cm
 ADDITIONAL_STRETCH_LENGTH = 6  # in cm
 
 # corresponds to Cuboid model interface
-ADDITIONAL_STRETCH_FORCE = 150  # in N
+ADDITIONAL_STRETCH_FORCE = 3  # in N
 
 # Bayesian Optimization
 SEED = 37
