@@ -46,6 +46,7 @@ range_of_motions = model.simulate_forward_for_botorch(initial_prestretch_force)
 
 stopper = ExpMAStoppingCriterion(n_window=2, minimize=False)
 is_optimization_converged = False
+iteration = 0
 
 while (is_optimization_converged is False):
     gp = gp_process(initial_prestretch_force, range_of_motions)
@@ -65,6 +66,9 @@ while (is_optimization_converged is False):
     range_of_motions = torch.cat([range_of_motions, new_range_of_motion])
 
     is_optimization_converged = stopper.evaluate(new_range_of_motion)
+
+    iteration += 1
+    print(f'Iteration {iteration} finished.')
 
 initial_prestretch_force = initial_prestretch_force.numpy()
 range_of_motions = range_of_motions.numpy()
