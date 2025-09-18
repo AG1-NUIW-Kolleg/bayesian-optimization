@@ -1,17 +1,17 @@
 from __future__ import annotations
 
+import random
+
 import torch
 from botorch.acquisition import UpperConfidenceBound
 from botorch.fit import fit_gpytorch_mll
 from botorch.models import SingleTaskGP
 from botorch.optim import optimize_acqf
 from botorch.optim.stopping import ExpMAStoppingCriterion
-from botorch.utils import draw_sobol_samples
 from gpytorch import ExactMarginalLogLikelihood
 
 from dev.constants import ADDITIONAL_STRETCH_FORCE
 from dev.constants import FILEPATH_OUTPUT
-from dev.constants import NUM_INITIAL_POINTS
 from dev.constants import NUM_NEW_CANDIDATES
 from dev.constants import SEED
 from dev.models.cuboid_wrapper import CuboidWrapper
@@ -35,10 +35,11 @@ parser = RangeOfMotionParser(FILEPATH_OUTPUT)
 
 model = CuboidWrapper(script_path, parser)
 
-bounds = torch.tensor([0, ADDITIONAL_STRETCH_FORCE])
+bounds = torch.tensor([[0, ADDITIONAL_STRETCH_FORCE]])
 
-initial_prestretch_force = draw_sobol_samples(
-    bounds=bounds, n=1, q=NUM_INITIAL_POINTS).squeeze(0).to(torch.double)
+initial_prestretch_force = random.uniform(0, ADDITIONAL_STRETCH_FORCE)
+initial_prestretch_force = torch.tensor(
+    initial_prestretch_force, dtype=torch.double)
 
 range_of_motions = model.simulate_forward_for_botorch(initial_prestretch_force)
 

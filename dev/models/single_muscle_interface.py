@@ -12,6 +12,7 @@ class SingleMuscleInterface(ABC):
         pass
 
     def simulate_forward_for_botorch(self, prestretch_force):
-        range_of_motion = self.simulate_forward_step(prestretch_force)
+        prestretch = prestretch_force.numpy()
+        range_of_motion = self.simulate_forward_step(prestretch)
         range_of_motion = torch.tensor([[range_of_motion]]).to(torch.double)
         return range_of_motion
