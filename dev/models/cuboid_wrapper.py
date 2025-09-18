@@ -14,7 +14,7 @@ class CuboidWrapper():
             os.path.dirname(os.path.dirname(os.path.dirname(
                 simulation_script_path)))
 
-    def simulate_step(self, pre_stretch_force):
+    def simulate_step(self, pre_stretch_force: float) -> float:
         env = os.environ.copy()
         env['PYTHONPATH'] = self._project_root
         env['PATH'] = \
