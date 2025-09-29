@@ -1,7 +1,6 @@
 # manual entries
 lab.ipynb
 *.png
-out/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
