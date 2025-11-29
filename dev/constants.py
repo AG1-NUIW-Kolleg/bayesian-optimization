@@ -16,5 +16,3 @@ NUM_NEW_CANDIDATES = 1
 # Cubiod model
 FILEPATH_OUTPUT = \
     '/usr/local/home/cmcs-fa01/opendihu-elise/examples/electrophysiology/neuromuscular/cuboid_4x4_prestretch_general/build_release/'
-
-
