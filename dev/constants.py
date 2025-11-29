@@ -6,7 +6,7 @@ RELAXED_MUSCLE_LENGTH_TWO = 13.0  # in cm
 ADDITIONAL_STRETCH_LENGTH = 6  # in cm
 
 # corresponds to Cuboid model interface
-ADDITIONAL_STRETCH_FORCE = 3  # in N
+ADDITIONAL_STRETCH_FORCE = 15  # in N
 
 # Bayesian Optimization
 SEED = 37
@@ -15,4 +15,6 @@ NUM_NEW_CANDIDATES = 1
 
 # Cubiod model
 FILEPATH_OUTPUT = \
-    '/usr/local/home/cmcs-fa01/opendihu-elise/examples/electrophysiology/neuromuscular/cuboid_muscle_with_prestretch_4x4/build_release/muscle_length_contraction.csv'
+    '/usr/local/home/cmcs-fa01/opendihu-elise/examples/electrophysiology/neuromuscular/cuboid_4x4_prestretch_general/build_release/'
+
+
