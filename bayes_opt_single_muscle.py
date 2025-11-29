@@ -30,7 +30,7 @@ def gp_process(x, y):
 torch.manual_seed(SEED)
 
 script_path = \
-    '/usr/local/home/cmcs-fa01/opendihu-elise/examples/electrophysiology/neuromuscular/cuboid_muscle_with_prestretch_4x4/'
+    '/usr/local/home/cmcs-fa01/opendihu-elise/examples/electrophysiology/neuromuscular/cuboid_4x4_prestretch_general/'
 
 parser = RangeOfMotionParser(FILEPATH_OUTPUT)
 
