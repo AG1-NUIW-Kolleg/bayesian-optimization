@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 
-class RangeOfMotionPlotter():
+class ThreeDRangeOfMotionPlotter():
     def __init__(self, initial_muscle_lengths, range_of_motions, params):
         self._muscle_lengths = initial_muscle_lengths
         self._range_of_motions = range_of_motions

@@ -14,7 +14,8 @@ from dev.constants import NUM_INITIAL_POINTS
 from dev.constants import NUM_NEW_CANDIDATES
 from dev.constants import SEED
 from dev.models.hill_type_model_wrapper import HillTypeModelWrapper
-from dev.visual.range_of_motion_plotter import RangeOfMotionPlotter
+from dev.visual.three_d_range_of_motion_plotter import \
+    ThreeDRangeOfMotionPlotter
 
 
 def acq_func(gaussian_process):
@@ -30,7 +31,7 @@ relaxed_muscle_lengths = [
     (11.0, 12.0),
     (11.0, 15.0),
     (12.0, 13.0),
-    (14.0, 15.0)
+    (12.0, 15.0)
 ]
 
 torch.manual_seed(SEED)
@@ -82,7 +83,7 @@ for length_pair in relaxed_muscle_lengths:
     initial_muscle_lengths = initial_muscle_lengths.numpy()
     range_of_motions = range_of_motions.numpy()
 
-    plotter = RangeOfMotionPlotter(
+    plotter = ThreeDRangeOfMotionPlotter(
         initial_muscle_lengths, range_of_motions, params)
     plotter.save_as_csv(f'm1_{length_pair[0]}_m2_{length_pair[1]}')
     plotter.plot()
