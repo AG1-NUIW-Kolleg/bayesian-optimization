@@ -1,5 +1,4 @@
 The following data slots were connected because the names appeared in both terms of a coupling or splitting scheme:
-<<<<<<< HEAD
       vm ¤ <─> ¤ vm
   stress ¤ <─> ¤ stress
    alpha ¤ <─> ¤ alpha
@@ -10,18 +9,6 @@ Solver structure:
 
 ├── Coupling
 │  data slots:
-=======
-      vm ¤ <─> ¤ vm
-  stress ¤ <─> ¤ stress
-   alpha ¤ <─> ¤ alpha
-  lambda ¤ <─> ¤ lambda
-    ldot ¤ <─> ¤ ldot
-
-Solver structure:
-
-├── Coupling
-│  data slots:
->>>>>>> b6c0e7470a557bba139b36902b4c45941ee8937f
 │  [a] solution.membrane/V                           ├──────────────────────────────────────── vm ¤0  x
 │  [a] Razumova/activestress                         :├─────────────────────────────────── stress ¤1  x
 │  [a] Razumova/activation                           ::├─────────────────────────────────── alpha ¤2  x
@@ -56,15 +43,9 @@ Solver structure:
 │  [b] u.x                                           :::::::::::::::::::::::::::::::├──────────── ¤31 x
 │  [b] u.y                                           ::::::::::::::::::::::::::::::::├─────────── ¤32 x
 │  [b] u.z                                           :::::::::::::::::::::::::::::::::├────────── ¤33 x
-<<<<<<< HEAD
 │                                                    ::::::::::::::::::::::::::::::::::
 │ ├── Coupling                                       ::::::::::::::::::::::::::::::::::
 │ │  data slots:                                     ::::::::::::::::::::::::::::::::::
-=======
-│                                                    ::::::::::::::::::::::::::::::::::
-│ ├── Coupling                                       ::::::::::::::::::::::::::::::::::
-│ │  data slots:                                     ::::::::::::::::::::::::::::::::::
->>>>>>> b6c0e7470a557bba139b36902b4c45941ee8937f
 │ │  [a] solution.membrane/V                         ├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷─────── vm ¤0  x
 │ │  [a] Razumova/activestress                       :├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷─── stress ¤1  x
 │ │  [a] Razumova/activation                         ::├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷──── alpha ¤2  x
@@ -82,7 +63,6 @@ Solver structure:
 │ │  [b] u.x                                         ::::::::::::::├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷────────── ¤14 x
 │ │  [b] u.y                                         :::::::::::::::├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷────────── ¤15 x
 │ │  [b] u.z                                         ::::::::::::::::├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷────────── ¤16 x
-<<<<<<< HEAD
 │ │                                                  ::::::::::::::::::::::::::::::::::
 │ │  slot connections:                               ::::::::::::::::::::::::::::::::::
 │ │  1¤ ─> ¤2                                        ::::::::::::::::::::::::::::::::::
@@ -92,17 +72,6 @@ Solver structure:
 │ │ │ └── MultipleInstances                          ::::::::::::::::::::::::::::::::::
 │ │ │ │ ├── StrangSplitting                          ::::::::::::::::::::::::::::::::::
 │ │ │ │ │  data slots:                               ::::::::::::::::::::::::::::::::::
-=======
-│ │                                                  ::::::::::::::::::::::::::::::::::
-│ │  slot connections:                               ::::::::::::::::::::::::::::::::::
-│ │  1¤ ─> ¤2                                        ::::::::::::::::::::::::::::::::::
-│ │                                                  ::::::::::::::::::::::::::::::::::
-│ │ ├── FastMonodomainSolver                         ::::::::::::::::::::::::::::::::::
-│ │ │   ("Term1")                                    ::::::::::::::::::::::::::::::::::
-│ │ │ └── MultipleInstances                          ::::::::::::::::::::::::::::::::::
-│ │ │ │ ├── StrangSplitting                          ::::::::::::::::::::::::::::::::::
-│ │ │ │ │  data slots:                               ::::::::::::::::::::::::::::::::::
->>>>>>> b6c0e7470a557bba139b36902b4c45941ee8937f
 │ │ │ │ │  [a] solution.membrane/V                   ├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷─────── vm ¤0  x
 │ │ │ │ │  [a] Razumova/activestress                 :├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷─── stress ¤1─────────────┐
 │ │ │ │ │  [a] Razumova/activation                   ::├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷──── alpha ¤2  x          │
@@ -165,7 +134,6 @@ Solver structure:
 │ │ │  [b] u.x                                                     ├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷────────── ¤4  x
 │ │ │  [b] u.y                                                      ├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷────────── ¤5  x
 │ │ │  [b] u.z                                                       ├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷────────── ¤6  x
-<<<<<<< HEAD
 │ │ │                                                                 :::::::::::::::::
 │ │ │ ├── HyperelasticitySolver                                       :::::::::::::::::
 │ │ │ │  data slots:                                                  :::::::::::::::::
@@ -178,20 +146,6 @@ Solver structure:
 │                                                                     :::::::::::::::::
 │ ├── Coupling                                                        :::::::::::::::::
 │ │  data slots:                                                      :::::::::::::::::
-=======
-│ │ │                                                                 :::::::::::::::::
-│ │ │ ├── HyperelasticitySolver                                       :::::::::::::::::
-│ │ │ │  data slots:                                                  :::::::::::::::::
-│ │ │ │  [b] u.x                                                      :::::::::::::::::           ¤0  x
-│ │ │ │  [b] u.y                                                      :::::::::::::::::           ¤1  x
-│ │ │ │  [b] u.z                                                      :::::::::::::::::           ¤2  x
-│ │ │ │                                                               :::::::::::::::::
-│ │ └                                                                 :::::::::::::::::
-│ └                                                                   :::::::::::::::::
-│                                                                     :::::::::::::::::
-│ ├── Coupling                                                        :::::::::::::::::
-│ │  data slots:                                                      :::::::::::::::::
->>>>>>> b6c0e7470a557bba139b36902b4c45941ee8937f
 │ │  [a] solution.membrane/V                                          ├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷─────── vm ¤0  x
 │ │  [a] Razumova/activestress                                        :├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷─── stress ¤1  x
 │ │  [a] Razumova/activation                                          ::├÷÷÷÷÷÷÷÷÷÷÷÷÷÷──── alpha ¤2  x
@@ -209,7 +163,6 @@ Solver structure:
 │ │  [b] u.x                                                          ::::::::::::::├÷÷────────── ¤14 x
 │ │  [b] u.y                                                          :::::::::::::::├÷────────── ¤15 x
 │ │  [b] u.z                                                          ::::::::::::::::├────────── ¤16 x
-<<<<<<< HEAD
 │ │                                                                   :::::::::::::::::
 │ │  slot connections:                                                :::::::::::::::::
 │ │  1¤ ─> ¤2                                                         :::::::::::::::::
@@ -219,17 +172,6 @@ Solver structure:
 │ │ │ └── MultipleInstances                                           :::::::::::::::::
 │ │ │ │ ├── StrangSplitting                                           :::::::::::::::::
 │ │ │ │ │  data slots:                                                :::::::::::::::::
-=======
-│ │                                                                   :::::::::::::::::
-│ │  slot connections:                                                :::::::::::::::::
-│ │  1¤ ─> ¤2                                                         :::::::::::::::::
-│ │                                                                   :::::::::::::::::
-│ │ ├── FastMonodomainSolver                                          :::::::::::::::::
-│ │ │   ("Term1")                                                     :::::::::::::::::
-│ │ │ └── MultipleInstances                                           :::::::::::::::::
-│ │ │ │ ├── StrangSplitting                                           :::::::::::::::::
-│ │ │ │ │  data slots:                                                :::::::::::::::::
->>>>>>> b6c0e7470a557bba139b36902b4c45941ee8937f
 │ │ │ │ │  [a] solution.membrane/V                                    ├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷─────── vm ¤0  x
 │ │ │ │ │  [a] Razumova/activestress                                  :├÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷─── stress ¤1───┐
 │ │ │ │ │  [a] Razumova/activation                                    ::├÷÷÷÷÷÷÷÷÷÷÷÷÷÷──── alpha ¤2  x│
@@ -285,7 +227,6 @@ Solver structure:
 │ │ │  [b] u.x                                                                      ├÷÷────────── ¤4  x
 │ │ │  [b] u.y                                                                       ├÷────────── ¤5  x
 │ │ │  [b] u.z                                                                        ├────────── ¤6  x
-<<<<<<< HEAD
 │ │ │
 │ │ │ └── DynamicHyperelasticitySolver
 │ │ │ │ ├── HyperelasticitySolver
@@ -299,21 +240,6 @@ Solver structure:
 │ └
 └
 
-=======
-│ │ │
-│ │ │ └── DynamicHyperelasticitySolver
-│ │ │ │ ├── HyperelasticitySolver
-│ │ │ │ │  data slots:
-│ │ │ │ │  [b] u.x                                                                                ¤0  x
-│ │ │ │ │  [b] u.y                                                                                ¤1  x
-│ │ │ │ │  [b] u.z                                                                                ¤2  x
-│ │ │ │ │
-│ │ │ └
-│ │ └
-│ └
-└
-
->>>>>>> b6c0e7470a557bba139b36902b4c45941ee8937f
 Connection Types:
   +··+   Internal connection, no copy
   ════   Reuse variable, no copy
